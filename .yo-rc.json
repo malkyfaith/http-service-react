@@ -1,0 +1,8 @@
+{
+  "@lendi/generator-cra": {
+    "promptValues": {
+      "name": "broker-self-employed",
+      "description": "A micro-frontend for the broker view of self-employed"
+    }
+  }
+}

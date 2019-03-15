@@ -1,0 +1,100 @@
+
+# only include the last commit for faster checkouts
+clone:
+  depth: 1
+
+image:
+  name: 291089888569.dkr.ecr.ap-southeast-2.amazonaws.com/platform-tools:latest
+  aws:
+    access-key: $AWS_ACCESS_KEY_ID
+    secret-key: $AWS_SECRET_ACCESS_KEY
+
+pipelines:
+  default:
+    - step:
+          name: ✅ Test
+          script:
+            - ./ci/test.sh
+          caches:
+            - node
+
+    - step:
+        name: 👷‍♂️ Build development
+        script:
+          - ./ci/build.sh development broker-self-employed
+        caches:
+          - node
+        artifacts:
+          - build/**
+
+    - step:
+        name: 🚀 Deploy development
+        script:
+          - ./ci/deploy.sh development broker-self-employed
+        caches:
+          - node
+
+  branches:
+    master:
+      - parallel:
+        - step:
+            name: 👮‍♂️ Lint
+            script:
+              - ./ci/lint.sh
+            caches:
+              - node
+        - step:
+            name: ✅ Test
+            script:
+              - ./ci/test.sh
+            caches:
+              - node
+
+      - step:
+          name: 👷‍♂️ Build development
+          script:
+            - ./ci/build.sh development broker-self-employed
+          caches:
+            - node
+          artifacts:
+            - build/**
+
+      - step:
+          name: 🚀 Deploy development
+          deployment: test
+          script:
+            - ./ci/deploy.sh development broker-self-employed
+          caches:
+            - node
+
+      - step:
+          name: 👷‍♂️ Build staging
+          script:
+            - ./ci/build.sh staging broker-self-employed
+          caches:
+            - node
+          artifacts:
+            - build/**
+      - step:
+          name: 🚀 Deploy staging
+          deployment: staging
+          script:
+            - ./ci/deploy.sh staging broker-self-employed
+          caches:
+            - node
+      - step:
+          name: 👷‍♂️ Build production
+          script:
+            - ./ci/build.sh production broker-self-employed
+          caches:
+            - node
+          artifacts:
+            - build/**
+      - step:
+          name: 🚀 Deploy production
+          deployment: production
+          script:
+            - ./ci/deploy.sh production broker-self-employed
+          caches:
+            - node
+

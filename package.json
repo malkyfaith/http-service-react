@@ -1,0 +1,94 @@
+{
+  "name": "broker-self-employed",
+  "private": true,
+  "version": "2.0.0",
+  "description": "A micro-frontend for the broker view of self-employed",
+  "dependencies": {
+    "@lendi-ui/alert": "^1.0.2",
+    "@lendi-ui/button": "^4.1.2",
+    "@lendi-ui/card": "^1.0.1",
+    "@lendi-ui/checkbox": "^1.0.0",
+    "@lendi-ui/color": "^2.0.2",
+    "@lendi-ui/container": "^3.0.0",
+    "@lendi-ui/depth": "^1.0.0",
+    "@lendi-ui/dropdown": "^1.0.0",
+    "@lendi-ui/field": "^1.1.2",
+    "@lendi-ui/grid": "^1.1.1",
+    "@lendi-ui/icon": "4.4.0",
+    "@lendi-ui/spacing": "^3.1.0",
+    "@lendi-ui/text-input": "^2.1.0",
+    "@lendi-ui/theme": "^4.0.0",
+    "@lendi-ui/toggle-switch": "^1.0.4",
+    "@lendi-ui/typography": "^2.5.1",
+    "@lendi-ui/utils": "^1.1.1",
+    "@types/react-helmet": "^5.0.8",
+    "@types/react-router-dom": "^4.3.1",
+    "axios": "^0.18.0",
+    "final-form": "^4.11.1",
+    "numeral": "^2.0.6",
+    "react": "^16.4.0",
+    "react-dom": "^16.4.0",
+    "react-final-form": "^4.0.2",
+    "react-helmet": "^5.2.0",
+    "react-router-dom": "^4.3.1",
+    "styled-components": "^3.3.3"
+  },
+  "devDependencies": {
+    "@lendi/editor-config": "^1.0.0",
+    "@lendi/prettier-config": "^1.0.0",
+    "@lendi/tslint-config": "^1.0.0",
+    "@lendi/typescript-config": "^1.0.0",
+    "@types/enzyme": "^3.1.10",
+    "@types/enzyme-adapter-react-16": "^1.0.3",
+    "@types/jest": "^23.3.10",
+    "@types/node": "^10.12.15",
+    "@types/react": "^16.7.17",
+    "@types/react-dom": "^16.0.11",
+    "enzyme": "^3.8.0",
+    "enzyme-adapter-react-16": "^1.7.1",
+    "enzyme-to-json": "^3.3.4",
+    "husky": "^1.0.0",
+    "jest": "^23.1.0",
+    "jest-styled-components": "^6.2.1",
+    "lint-staged": "^7.2.0",
+    "prettier": "^1.13.5",
+    "prettier-check": "^2.0.0",
+    "react-router-dom": "^4.3.1",
+    "react-scripts": "^2.1.1",
+    "react-test-renderer": "^16.7.0",
+    "tslint": "^5.10.0",
+    "typescript": "^3.2.2"
+  },
+  "scripts": {
+    "lint:format": "prettier-check '**/*.{json,js,jsx,ts,tsx,md}'",
+    "lint:sources": "tslint --config tslint.sources.json -p tsconfig.json --format stylish 'src/**/*.ts' 'src/**/*.tsx' --exclude 'src/**/*.test.ts' --exclude 'src/**/*.test.tsx' --exclude src/setupTests.ts",
+    "lint:tests": "tslint --config tslint.tests.json -p tsconfig.json --format stylish 'src/**/*.test.ts' 'src/**/*.test.tsx' src/setupTests.ts",
+    "lint:types": "tsc",
+    "lint": "yarn run lint:types && yarn run lint:sources && yarn run lint:tests && yarn run lint:format",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "format": "prettier --write 'src/**/*.{js,jsx,ts,tsx}'"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ],
+  "husky": {
+    "pre-commit": "lint-staged",
+    "pre-push": "yarn run lint:format"
+  },
+  "lint-staged": {
+    "*.{ts,tsx}": [
+      "prettier --write",
+      "git add"
+    ],
+    "*.{md,css,js,json}": [
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "license": "MIT"
+}

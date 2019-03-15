@@ -1,0 +1,17 @@
+{
+  "extends": "./node_modules/@lendi/typescript-config/tsconfig.json",
+  "compilerOptions": {
+    "jsx": "preserve",
+    "lib": ["dom", "esnext"],
+    "noEmit": true,
+    "allowJs": true,
+    "skipLibCheck": false,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "module": "esnext",
+    "resolveJsonModule": true,
+    "isolatedModules": true
+  },
+  "include": ["src/**/*.ts", "src/**/*.tsx", "typings/**/*.d.ts"]
+}
